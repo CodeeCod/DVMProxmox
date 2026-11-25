@@ -1,0 +1,7 @@
+# playbooks/deploy_vms.yml
+---
+- name: Развертывание виртуальных машин в Proxmox
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - vm_deploy

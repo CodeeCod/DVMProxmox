@@ -1,0 +1,30 @@
+# roles/vm_deploy/tasks/main.yml
+---
+- name: Клонирование виртуальной машины из шаблона
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_token_id }}"
+    api_token_secret: "{{ proxmox_token_secret }}"
+    node: "{{ proxmox_node }}"
+    clone: "{{ proxmox_template }}"
+    name: "{{ vm_name }}"
+    newid: "{{ vm_vmid }}"
+    full: true
+    state: present
+  delegate_to: localhost
+
+- name: Настройка ресурсов и сети клонированной ВМ
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_token_id }}"
+    api_token_secret: "{{ proxmox_token_secret }}"
+    node: "{{ proxmox_node }}"
+    vmid: "{{ vm_vmid }}"
+    cores: "{{ vm_cores }}"
+    memory: "{{ vm_memory }}"
+    ipconfig:
+      ipconfig0: "{{ vm_ipconfig }}"
+    update: true
+  delegate_to: localhost

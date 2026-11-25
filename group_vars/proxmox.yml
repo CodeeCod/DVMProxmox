@@ -1,0 +1,5 @@
+# group_vars/proxmox.yml
+proxmox_node: "pve01"                # Имя узла Proxmox по умолчанию
+proxmox_template: "ubuntu-2204-template" # Имя шаблона для клонирования
+proxmox_storage: "local-lvm"         # Хранилище для дисков ВМ
+proxmox_bridge: "vmbr0"              # Сетевой мост

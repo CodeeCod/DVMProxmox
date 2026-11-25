@@ -1,0 +1,5 @@
+# group_vars/all.yml
+proxmox_api_host: "pve01.lab.local"  # IP или доменное имя вашего Proxmox
+proxmox_api_user: "root@pam"
+proxmox_token_id: "ansible-token"
+proxmox_token_secret: "your-super-secret-token-value" # Секрет токена
