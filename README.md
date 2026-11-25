@@ -1,2 +1,2 @@
 # DVMProxmox
-Deploying a VM on Proxmox
+Развертывание VM на Proxmox
