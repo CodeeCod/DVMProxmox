@@ -1,0 +1,61 @@
+name: Ansible CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install ansible-core ansible-lint yamllint
+          ansible-galaxy collection install community.proxmox
+      - name: Run yamllint
+        run: yamllint .
+      - name: Run ansible-lint
+        run: ansible-lint .
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test dependencies
+        run: |
+          pip install pytest pytest-testinfra ansible-core
+          ansible-galaxy collection install community.proxmox
+      - name: Run unit tests
+        run: |
+          # Если у вас есть кастомные Python-модули/фильтры
+          pytest tests/unit/ -v
+
+  molecule:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Molecule and dependencies
+        run: |
+          pip install molecule "molecule-plugins[docker]" ansible-core
+          ansible-galaxy collection install community.proxmox
+      - name: Run Molecule test
+        run: |
+          cd roles/vm_deploy
+          molecule test
