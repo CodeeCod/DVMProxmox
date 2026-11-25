@@ -31,7 +31,7 @@ pip install proxmoxer requests
 ## Структура проекта
 
 ```text
-proxmox-vm-deploy/
+DVMProxmox/
 ├── ansible.cfg                    # Конфигурация Ansible
 ├── README.md                      # Этот файл
 ├── inventory/
