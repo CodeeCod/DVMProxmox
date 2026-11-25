@@ -1,6 +1,0 @@
-- name: Verify
-  hosts: all
-  tasks:
-    - name: Check if role completed without syntax errors
-      assert:
-        that: true  # Заглушка, так как полноценная проверка требует мока Proxmox API
