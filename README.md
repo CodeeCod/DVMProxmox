@@ -31,7 +31,7 @@ pip install proxmoxer requests
 ## Структура проекта
 
 ```text
-DVMProxmox/
+proxmox-vm-deploy/
 ├── ansible.cfg                    # Конфигурация Ansible
 ├── README.md                      # Этот файл
 ├── inventory/
@@ -68,7 +68,7 @@ DVMProxmox/
 ### 1. Клонируйте проект
 
 ```bash
-git clone <your-repo-url> proxmox-vm-deploy
+git clone https://github.com/CodeeCod/DVMProxmox.git proxmox-vm-deploy
 cd proxmox-vm-deploy
 ```
 
